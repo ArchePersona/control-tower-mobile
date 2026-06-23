@@ -282,13 +282,14 @@ export default function TowerScreen() {
       )}
 
       <Text style={s.footerMotto}>Character + Consequence = Trust.</Text>
+      <View style={{ height: 40 }} />
     </ScrollView>
   );
 }
 
 const s = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.bg },
-  content: { paddingHorizontal: Spacing.lg, paddingBottom: 32 },
+  content: { paddingHorizontal: Spacing.lg, paddingBottom: 100 },
   loadingContainer: { flex: 1, backgroundColor: Colors.bg, justifyContent: "center", alignItems: "center" },
   header: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", paddingTop: Spacing.lg, marginBottom: Spacing.md },
   title: { fontFamily: Fonts.display, fontSize: 22, color: Colors.textPrimary, letterSpacing: 2 },

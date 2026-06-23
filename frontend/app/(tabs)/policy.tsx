@@ -50,7 +50,7 @@ export default function PolicyScreen() {
       <View style={s.metricsGrid}>
         <View style={s.metricCard}>
           <Text style={[s.metricValue, { color: Colors.red }]}>{summary?.denied_actions || 0}</Text>
-          <Text style={s.metricLabel}>Denied</Text>
+          <Text style={s.metricLabel}>Blocked</Text>
         </View>
         <View style={s.metricCard}>
           <Text style={[s.metricValue, { color: Colors.orange }]}>{summary?.escalation_risks || 0}</Text>

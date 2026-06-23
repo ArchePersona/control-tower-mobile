@@ -70,6 +70,8 @@ export default function LoginScreen() {
                 autoCapitalize="none"
                 keyboardType="email-address"
                 autoCorrect={false}
+                autoComplete="off"
+                textContentType="none"
               />
             </View>
           </View>
@@ -86,6 +88,8 @@ export default function LoginScreen() {
                 placeholder="Enter password"
                 placeholderTextColor={Colors.textMuted}
                 secureTextEntry={!showPassword}
+                autoComplete="off"
+                textContentType="none"
               />
               <TouchableOpacity testID="toggle-password-btn" onPress={() => setShowPassword(!showPassword)} style={s.eyeBtn}>
                 <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={20} color={Colors.textMuted} />

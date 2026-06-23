@@ -57,9 +57,23 @@ export default function VHoldScreen() {
     if (!iso) return "";
     const m = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
     if (m < 1) return "just now";
-    if (m < 60) return `${m}m`;
-    return `${Math.floor(m / 60)}h`;
+    if (m < 60) return `${m}m ago`;
+    return `${Math.floor(m / 60)}h ago`;
   };
+
+  const statusTiming = (proposal: any) => {
+    const t = timeAgo(proposal.created_at);
+    switch (proposal.status) {
+      case "pending": return `Waiting ${t}`;
+      case "held": return `Held ${t}`;
+      case "escalated": return `Escalated ${t}`;
+      case "approved": return `Approved ${t}`;
+      case "denied": return `Denied ${t}`;
+      default: return t;
+    }
+  };
+
+  const filteredCount = proposals.length;
 
   return (
     <View style={[s.container, { paddingTop: insets.top }]}>
@@ -72,11 +86,13 @@ export default function VHoldScreen() {
           </View>
           <View style={s.summaryBadges}>
             <View style={[s.badge, { backgroundColor: Colors.blueBg, borderColor: Colors.blueBorder }]}>
-              <Text style={[s.badgeText, { color: Colors.blue }]}>{summary?.pending || 0} pending</Text>
+              <Text style={[s.badgeText, { color: Colors.blue }]}>{filter === "all" ? (summary?.pending || 0) + " pending" : filteredCount + " shown"}</Text>
             </View>
-            <View style={[s.badge, { backgroundColor: Colors.orangeBg, borderColor: Colors.orangeBorder }]}>
-              <Text style={[s.badgeText, { color: Colors.orange }]}>{summary?.escalated || 0} esc</Text>
-            </View>
+            {filter === "all" && (
+              <View style={[s.badge, { backgroundColor: Colors.orangeBg, borderColor: Colors.orangeBorder }]}>
+                <Text style={[s.badgeText, { color: Colors.orange }]}>{summary?.escalated || 0} esc</Text>
+              </View>
+            )}
           </View>
         </View>
         <Text style={s.headerNote}>Review proposed agent actions before they create consequences.</Text>
@@ -138,7 +154,7 @@ export default function VHoldScreen() {
               </View>
               <Text style={s.pcReason} numberOfLines={2}>{p.reason}</Text>
               <View style={s.pcFooter}>
-                <Text style={s.pcTime}>Waiting {timeAgo(p.created_at)}</Text>
+                <Text style={s.pcTime}>{statusTiming(p)}</Text>
                 <Text style={s.pcReview}>Review →</Text>
               </View>
             </TouchableOpacity>
