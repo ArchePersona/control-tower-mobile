@@ -16,6 +16,7 @@ const tabs: { name: string; title: string; icon: TabIcon; iconActive: TabIcon }[
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
+  const bottomInset = Math.max(insets.bottom, 8);
 
   return (
     <Tabs
@@ -25,9 +26,9 @@ export default function TabLayout() {
           backgroundColor: Colors.bg,
           borderTopColor: Colors.border,
           borderTopWidth: 1,
-          paddingBottom: Platform.OS === "ios" ? insets.bottom : 8,
+          paddingBottom: bottomInset,
           paddingTop: 8,
-          height: Platform.OS === "ios" ? 52 + insets.bottom : 60,
+          height: 52 + bottomInset,
         },
         tabBarActiveTintColor: Colors.textPrimary,
         tabBarInactiveTintColor: Colors.textMuted,

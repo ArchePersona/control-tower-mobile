@@ -44,7 +44,8 @@ export default function TowerScreen() {
   };
 
   // Tab bar height + safe area bottom + breathing room
-  const tabBarHeight = Platform.OS === "ios" ? 52 + insets.bottom : 60;
+  const bottomInset = Math.max(insets.bottom, 8);
+  const tabBarHeight = 52 + bottomInset;
   const scrollPadding = tabBarHeight + 32;
 
   if (loading && !data) {
