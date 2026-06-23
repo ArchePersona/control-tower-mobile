@@ -1,0 +1,105 @@
+{
+  "theme": "dark",
+  "archetype": "2 (Performance Pro) / Tactical Control Room",
+  "typography": {
+    "font_families": {
+      "display": "'Audiowide', sans-serif",
+      "body": "'Manrope', sans-serif",
+      "mono": "'JetBrains Mono', monospace"
+    },
+    "hierarchy": {
+      "h1": "text-2xl sm:text-3xl font-display uppercase tracking-widest text-slate-50",
+      "h2": "text-xl font-bold font-body tracking-tight text-slate-100",
+      "h3": "text-xs font-bold uppercase tracking-widest text-slate-400",
+      "body": "text-sm font-body text-slate-300",
+      "small": "text-xs font-body text-slate-400",
+      "data": "text-2xl font-bold font-body tracking-tight text-white tabular-nums"
+    },
+    "google_fonts_url": "https://fonts.googleapis.com/css2?family=Audiowide&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+  },
+  "colors": {
+    "background": "#020617",
+    "surface": "#0F172A",
+    "surface_raised": "#1E293B",
+    "border": "#334155",
+    "text_primary": "#F8FAFC",
+    "text_secondary": "#94A3B8",
+    "status": {
+      "green": "#10B981",
+      "yellow": "#F59E0B",
+      "orange": "#F97316",
+      "red": "#EF4444",
+      "blue": "#3B82F6",
+      "purple": "#8B5CF6"
+    }
+  },
+  "layout_and_spacing": {
+    "global_container": "max-w-md mx-auto min-h-screen bg-slate-950 text-slate-50 relative pb-20 shadow-2xl overflow-x-hidden border-x border-slate-900",
+    "padding": {
+      "screen": "p-4",
+      "card": "p-4",
+      "compact": "p-3"
+    },
+    "grid_system": "Grid Mode B: Control Room (Mobile Adapted). Dense. Use flex-col with gap-3 or grid-cols-2 with gap-3 for side-by-side metrics.",
+    "border_radius": "rounded-xl for main containers, rounded-lg for cards, rounded-md for inner elements, rounded-full for indicators."
+  },
+  "components": {
+    "bottom_navigation": {
+      "wrapper": "fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-slate-950/95 backdrop-blur-xl border-t border-slate-800 flex justify-around items-center px-2 py-3 z-50",
+      "item_active": "text-slate-100 flex flex-col items-center gap-1",
+      "item_inactive": "text-slate-500 hover:text-slate-400 transition-colors flex flex-col items-center gap-1",
+      "label": "text-[10px] font-bold tracking-wide uppercase"
+    },
+    "cards": {
+      "base": "bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg",
+      "interactive": "bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg active:scale-[0.98] transition-transform cursor-pointer",
+      "header": "flex justify-between items-center p-3 border-b border-slate-800/50 bg-slate-800/20",
+      "body": "p-4"
+    },
+    "badges": {
+      "green": "px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 text-[10px] font-bold uppercase tracking-wider",
+      "yellow": "px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/30 text-[10px] font-bold uppercase tracking-wider",
+      "orange": "px-2 py-0.5 rounded bg-orange-500/10 text-orange-500 border border-orange-500/30 text-[10px] font-bold uppercase tracking-wider",
+      "red": "px-2 py-0.5 rounded bg-red-500/10 text-red-500 border border-red-500/30 text-[10px] font-bold uppercase tracking-wider",
+      "blue": "px-2 py-0.5 rounded bg-blue-500/10 text-blue-500 border border-blue-500/30 text-[10px] font-bold uppercase tracking-wider",
+      "purple": "px-2 py-0.5 rounded bg-violet-500/10 text-violet-400 border border-violet-500/30 text-[10px] font-bold uppercase tracking-wider"
+    },
+    "buttons": {
+      "primary": "w-full py-3 px-4 bg-slate-100 hover:bg-white text-slate-900 rounded-lg font-bold tracking-wide flex items-center justify-center transition-all",
+      "danger": "w-full py-3 px-4 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/30 rounded-lg font-bold tracking-wide flex items-center justify-center transition-all",
+      "outline": "w-full py-3 px-4 bg-transparent border border-slate-700 hover:bg-slate-800 text-white rounded-lg font-bold tracking-wide flex items-center justify-center transition-all"
+    }
+  },
+  "visual_enhancers": {
+    "textures": "Use grain/noise overlays sparingly. The dark mode should feel deep, unlit, and focused, like an aviation radar screen.",
+    "glow_effects": "Use subtle colored box-shadows on active states or critical alerts (e.g., a glowing red dot for escalated actions).",
+    "tactical_lines": "Divide sections with 1px solid borders (`border-slate-800`). Avoid large empty spaces; everything should feel intentionally compartmentalized."
+  },
+  "media": {
+    "icons_library": "lucide-react",
+    "image_urls": {
+      "logo_abstract": {
+        "url": "https://images.pexels.com/photos/28887852/pexels-photo-28887852.jpeg",
+        "description": "Abstract 3D floating cube for ArchePersona branding on the Login Screen."
+      },
+      "texture_bg": {
+        "url": "https://images.pexels.com/photos/3612930/pexels-photo-3612930.jpeg",
+        "description": "Dark tactical metal grid. Use at low opacity (10-15%) with mix-blend-overlay on the login screen background."
+      },
+      "avatar_operator": {
+        "url": "https://images.pexels.com/photos/7709255/pexels-photo-7709255.jpeg",
+        "description": "Operator profile picture for the top navigation or settings."
+      }
+    }
+  },
+  "instructions_to_main_agent": [
+    "CRITICAL: The prompt requests a React Native Expo app, but if executing as a React Web codebase, you MUST enforce a mobile-only layout by wrapping the main routing/App component in a centered container (`max-w-md mx-auto w-full min-h-screen bg-slate-950 relative overflow-x-hidden shadow-2xl`). The app should look exactly like a mobile phone screen resting in the center of the browser.",
+    "Embrace the 'Control Room' identity: Use dense information packing. No excessive whitespace. Information should be immediate, like looking at an aviation console.",
+    "Implement the Bottom Sheet / HITL Modal using a slide-up animation or an absolute positioned div anchored to the bottom inside the `max-w-md` container.",
+    "Apply specific status colors as requested: Green (Approved), Yellow (Held), Orange (Escalated), Red (Denied), Blue (Informational), Purple (COST BOSS). Use these strictly for semantic meaning, not decoration.",
+    "All interactive elements and key text MUST include `data-testid` attributes (e.g., `data-testid=\"v-hold-tab\"`).",
+    "Inject the Google Fonts `<link>` dynamically or in the `index.html`. Apply `'Audiowide'` to the CONTROL TOWER wordmark and `'Manrope'` to everything else.",
+    "Ensure 'Character + Consequence = Trust' is displayed prominently as a microcopy motto on the Login or Dashboard.",
+    "Build the dashboard as a 4-layer summary stack (V-HOLD, COST BOSS, POLICY PRIMER, TRUST LADDER). Each card should be distinct in color (referencing its domain) and highly tappable."
+  ]
+}
