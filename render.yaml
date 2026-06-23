@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: control-tower-mobile-api
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.deploy.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MONGO_URL
+        sync: false
+      - key: DB_NAME
+        value: control_tower_mobile
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_REFRESH_SECRET
+        sync: false
+      - key: ACCESS_TOKEN_MINUTES
+        value: "30"
+      - key: REFRESH_TOKEN_DAYS
+        value: "30"
