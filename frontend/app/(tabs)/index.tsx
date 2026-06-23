@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import {
   View, Text, ScrollView, TouchableOpacity, StyleSheet,
-  RefreshControl, ActivityIndicator,
+  RefreshControl, ActivityIndicator, Platform,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useFocusEffect, useRouter } from "expo-router";
@@ -43,6 +43,10 @@ export default function TowerScreen() {
     return `${Math.floor(m / 60)}h ago`;
   };
 
+  // Tab bar height + safe area bottom + breathing room
+  const tabBarHeight = Platform.OS === "ios" ? 52 + insets.bottom : 60;
+  const scrollPadding = tabBarHeight + 32;
+
   if (loading && !data) {
     return (
       <View style={[s.loadingContainer, { paddingTop: insets.top }]}>
@@ -54,7 +58,7 @@ export default function TowerScreen() {
   return (
     <ScrollView
       style={[s.container, { paddingTop: insets.top }]}
-      contentContainerStyle={s.content}
+      contentContainerStyle={[s.content, { paddingBottom: scrollPadding }]}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.blue} />}
       showsVerticalScrollIndicator={false}
     >
@@ -282,14 +286,13 @@ export default function TowerScreen() {
       )}
 
       <Text style={s.footerMotto}>Character + Consequence = Trust.</Text>
-      <View style={{ height: 40 }} />
     </ScrollView>
   );
 }
 
 const s = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.bg },
-  content: { paddingHorizontal: Spacing.lg, paddingBottom: 100 },
+  content: { paddingHorizontal: Spacing.lg },
   loadingContainer: { flex: 1, backgroundColor: Colors.bg, justifyContent: "center", alignItems: "center" },
   header: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", paddingTop: Spacing.lg, marginBottom: Spacing.md },
   title: { fontFamily: Fonts.display, fontSize: 22, color: Colors.textPrimary, letterSpacing: 2 },
