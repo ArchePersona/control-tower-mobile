@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "frontend",
+    "name": "CONTROL TOWER",
+    "slug": "control-tower",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "frontend",
+    "scheme": "control-tower",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
