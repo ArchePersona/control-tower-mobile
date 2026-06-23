@@ -1,33 +1,80 @@
-import { Stack } from "expo-router";
+import { Stack, useRouter, useSegments } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { LogBox } from "react-native";
+import { LogBox, ActivityIndicator, View, StyleSheet } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { useFonts } from "expo-font";
+import { StatusBar } from "expo-status-bar";
 
 import { useIconFonts } from "@/src/hooks/use-icon-fonts";
+import { ArchePersonaAuthProvider, useAuth } from "@/src/services/auth";
+import { Colors } from "@/src/theme";
 
-
-// Disable logbox errors etc so that users can see the app
-// and agent works as expected.
-LogBox.ignoreAllLogs(true)
-
-// Keep the native splash visible from cold start until icon fonts register.
-// Required because @expo/vector-icons' componentDidMount fallback fires
-// Font.loadAsync against a broken vendor path if any <Icon> mounts before
-// the family is registered — which throws on Android Expo Go.
+LogBox.ignoreAllLogs(true);
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
-  const [loaded, error] = useIconFonts();
+function RootNavigator() {
+  const { user, loading } = useAuth();
+  const segments = useSegments();
+  const router = useRouter();
 
   useEffect(() => {
-    if (loaded || error) {
+    if (loading) return;
+    const inAuth = segments[0] === "(auth)";
+    if (!user && !inAuth) {
+      router.replace("/(auth)/login");
+    } else if (user && inAuth) {
+      router.replace("/(tabs)");
+    }
+  }, [user, loading, segments]);
+
+  if (loading) {
+    return (
+      <View style={loadStyles.container}>
+        <ActivityIndicator size="large" color={Colors.blue} />
+      </View>
+    );
+  }
+
+  return (
+    <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: Colors.bg } }}>
+      <Stack.Screen name="(auth)" />
+      <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="proposal/[id]" options={{ presentation: "card" }} />
+      <Stack.Screen name="audit" options={{ presentation: "card" }} />
+    </Stack>
+  );
+}
+
+const loadStyles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: Colors.bg, justifyContent: "center", alignItems: "center" },
+});
+
+export default function RootLayout() {
+  const [iconsLoaded, iconsError] = useIconFonts();
+  const [fontsLoaded] = useFonts({
+    Audiowide: require("../assets/fonts/Audiowide-Regular.ttf"),
+    Manrope: require("../assets/fonts/Manrope-Regular.ttf"),
+    "Manrope-Medium": require("../assets/fonts/Manrope-Medium.ttf"),
+    "Manrope-SemiBold": require("../assets/fonts/Manrope-SemiBold.ttf"),
+    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
+    "Manrope-ExtraBold": require("../assets/fonts/Manrope-ExtraBold.ttf"),
+  });
+
+  useEffect(() => {
+    if ((iconsLoaded || iconsError) && fontsLoaded) {
       SplashScreen.hideAsync();
     }
-  }, [loaded, error]);
+  }, [iconsLoaded, iconsError, fontsLoaded]);
 
-  // If the CDN is unreachable we fall through on error rather than wedging
-  // the app — icons will tofu, but the app still boots.
-  if (!loaded && !error) return null;
+  if ((!iconsLoaded && !iconsError) || !fontsLoaded) return null;
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <SafeAreaProvider>
+      <StatusBar style="light" />
+      <ArchePersonaAuthProvider>
+        <RootNavigator />
+      </ArchePersonaAuthProvider>
+    </SafeAreaProvider>
+  );
 }
