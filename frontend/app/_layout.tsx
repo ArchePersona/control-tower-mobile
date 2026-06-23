@@ -38,6 +38,7 @@ function RootNavigator() {
 
   return (
     <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: Colors.bg } }}>
+      <Stack.Screen name="index" />
       <Stack.Screen name="(auth)" />
       <Stack.Screen name="(tabs)" />
       <Stack.Screen name="proposal/[id]" options={{ presentation: "card" }} />
@@ -52,7 +53,7 @@ const loadStyles = StyleSheet.create({
 
 export default function RootLayout() {
   const [iconsLoaded, iconsError] = useIconFonts();
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded, fontsError] = useFonts({
     Audiowide: require("../assets/fonts/Audiowide-Regular.ttf"),
     Manrope: require("../assets/fonts/Manrope-Regular.ttf"),
     "Manrope-Medium": require("../assets/fonts/Manrope-Medium.ttf"),
@@ -62,12 +63,13 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    if ((iconsLoaded || iconsError) && fontsLoaded) {
+    if ((iconsLoaded || iconsError) && (fontsLoaded || fontsError)) {
       SplashScreen.hideAsync();
     }
-  }, [iconsLoaded, iconsError, fontsLoaded]);
+  }, [iconsLoaded, iconsError, fontsLoaded, fontsError]);
 
-  if ((!iconsLoaded && !iconsError) || !fontsLoaded) return null;
+  // Fall through on error — icons/fonts will use fallback, but app still boots
+  if ((!iconsLoaded && !iconsError) || (!fontsLoaded && !fontsError)) return null;
 
   return (
     <SafeAreaProvider>
