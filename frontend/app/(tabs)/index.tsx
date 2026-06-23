@@ -43,8 +43,10 @@ export default function TowerScreen() {
     return `${Math.floor(m / 60)}h ago`;
   };
 
-  // Tab bar height + safe area bottom + breathing room
-  const bottomInset = Math.max(insets.bottom, 8);
+  // Match tab layout: Android nav bar minimum 48dp
+  const bottomInset = Platform.OS === "android"
+    ? Math.max(insets.bottom, 48)
+    : Math.max(insets.bottom, 8);
   const tabBarHeight = 52 + bottomInset;
   const scrollPadding = tabBarHeight + 32;
 

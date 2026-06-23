@@ -16,7 +16,10 @@ const tabs: { name: string; title: string; icon: TabIcon; iconActive: TabIcon }[
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
-  const bottomInset = Math.max(insets.bottom, 8);
+  // Android nav bar is typically 48dp; insets.bottom can report 0 in Expo Go edge-to-edge
+  const bottomInset = Platform.OS === "android"
+    ? Math.max(insets.bottom, 48)
+    : Math.max(insets.bottom, 8);
 
   return (
     <Tabs
