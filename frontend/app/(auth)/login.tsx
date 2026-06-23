@@ -113,6 +113,35 @@ export default function LoginScreen() {
               <Text style={s.loginBtnText}>Sign In</Text>
             )}
           </TouchableOpacity>
+
+          <View style={s.dividerRow}>
+            <View style={s.dividerLine} />
+            <Text style={s.dividerText}>OR</Text>
+            <View style={s.dividerLine} />
+          </View>
+
+          <TouchableOpacity
+            testID="demo-login-button"
+            style={[s.demoBtn, loading && s.loginBtnDisabled]}
+            onPress={async () => {
+              setEmail("operator@archepersona.com");
+              setPassword("ControlTower2026!");
+              setError("");
+              setLoading(true);
+              try {
+                await signIn("operator@archepersona.com", "ControlTower2026!");
+              } catch (e: any) {
+                setError(e.message || "Login failed");
+              } finally {
+                setLoading(false);
+              }
+            }}
+            disabled={loading}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="flash" size={18} color={Colors.blue} />
+            <Text style={s.demoBtnText}>Demo Login</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Footer */}
@@ -159,6 +188,15 @@ const s = StyleSheet.create({
   },
   loginBtnDisabled: { opacity: 0.6 },
   loginBtnText: { fontFamily: Fonts.bodyBold, fontSize: 15, color: Colors.bg, letterSpacing: 0.5 },
+  dividerRow: { flexDirection: "row", alignItems: "center", marginVertical: Spacing.lg },
+  dividerLine: { flex: 1, height: 1, backgroundColor: Colors.border },
+  dividerText: { fontFamily: Fonts.bodySemiBold, fontSize: 11, color: Colors.textMuted, paddingHorizontal: Spacing.md, letterSpacing: 1 },
+  demoBtn: {
+    flexDirection: "row", alignItems: "center", justifyContent: "center", gap: Spacing.sm,
+    backgroundColor: Colors.blueBg, borderRadius: Radius.md, paddingVertical: 14,
+    borderWidth: 1, borderColor: Colors.blueBorder,
+  },
+  demoBtnText: { fontFamily: Fonts.bodyBold, fontSize: 15, color: Colors.blue, letterSpacing: 0.5 },
   footer: { alignItems: "center" },
   motto: { fontFamily: Fonts.bodySemiBold, fontSize: 13, color: Colors.textSecondary, marginBottom: 4 },
   version: { fontFamily: Fonts.body, fontSize: 11, color: Colors.textMuted },
