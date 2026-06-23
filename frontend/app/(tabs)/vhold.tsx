@@ -61,15 +61,22 @@ export default function VHoldScreen() {
     return `${Math.floor(m / 60)}h ago`;
   };
 
+  const timeDuration = (iso: string) => {
+    if (!iso) return "";
+    const m = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
+    if (m < 1) return "<1m";
+    if (m < 60) return `${m}m`;
+    return `${Math.floor(m / 60)}h`;
+  };
+
   const statusTiming = (proposal: any) => {
-    const t = timeAgo(proposal.created_at);
     switch (proposal.status) {
-      case "pending": return `Waiting ${t}`;
-      case "held": return `Held ${t}`;
-      case "escalated": return `Escalated ${t}`;
-      case "approved": return `Approved ${t}`;
-      case "denied": return `Denied ${t}`;
-      default: return t;
+      case "pending": return `Waiting ${timeDuration(proposal.created_at)}`;
+      case "held": return `Held ${timeDuration(proposal.created_at)}`;
+      case "escalated": return `Escalated ${timeAgo(proposal.created_at)}`;
+      case "approved": return `Approved ${timeAgo(proposal.created_at)}`;
+      case "denied": return `Denied ${timeAgo(proposal.created_at)}`;
+      default: return timeAgo(proposal.created_at);
     }
   };
 
