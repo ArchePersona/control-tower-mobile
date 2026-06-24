@@ -16,10 +16,12 @@ const tabs: { name: string; title: string; icon: TabIcon; iconActive: TabIcon }[
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
-  // Android nav bar is typically 48dp; insets.bottom can report 0 in Expo Go edge-to-edge
-  const bottomInset = Platform.OS === "android"
-    ? Math.max(insets.bottom, 48)
-    : Math.max(insets.bottom, 8);
+
+  // Native Android can report a 0 bottom inset in Expo Go edge-to-edge mode.
+  // Mobile web also needs extra clearance above the browser / Android nav controls.
+  const bottomInset = Platform.OS === "ios"
+    ? Math.max(insets.bottom, 16)
+    : Math.max(insets.bottom, 64);
 
   return (
     <Tabs
@@ -30,8 +32,12 @@ export default function TabLayout() {
           borderTopColor: Colors.border,
           borderTopWidth: 1,
           paddingBottom: bottomInset,
-          paddingTop: 8,
-          height: 52 + bottomInset,
+          paddingTop: 10,
+          height: 72 + bottomInset,
+        },
+        tabBarItemStyle: {
+          paddingTop: 6,
+          paddingBottom: 6,
         },
         tabBarActiveTintColor: Colors.textPrimary,
         tabBarInactiveTintColor: Colors.textMuted,
@@ -40,6 +46,7 @@ export default function TabLayout() {
           fontSize: 10,
           letterSpacing: 0.5,
           textTransform: "uppercase",
+          marginTop: 2,
         },
       }}
     >
@@ -49,7 +56,7 @@ export default function TabLayout() {
           name={tab.name}
           options={{
             title: tab.title,
-            tabBarIcon: ({ focused, color, size }) => (
+            tabBarIcon: ({ focused, color }) => (
               <Ionicons name={focused ? tab.iconActive : tab.icon} size={22} color={color} />
             ),
             tabBarTestID: `tab-${tab.name}`,
