@@ -66,6 +66,7 @@ export default function LoginScreen() {
       <ImageBackground source={towerBackground} style={s.loginPage} resizeMode="cover">
         <View style={s.loginOverlay} />
         <ScrollView
+          style={s.scroll}
           contentContainerStyle={[
             s.container,
             {
@@ -73,13 +74,15 @@ export default function LoginScreen() {
               paddingBottom: insets.bottom + 40,
             },
           ]}
+          horizontal={false}
+          showsHorizontalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
           <View style={s.loginHero}>
             <View style={s.towerIcon}>
               <Text style={s.towerIconText}>⌁</Text>
             </View>
-            <Text style={s.appTitle} testID="app-title">CONTROL TOWER</Text>
+            <Text style={[s.appTitle, isMobile && s.appTitleMobile]} testID="app-title">CONTROL TOWER</Text>
             <Text style={s.companyName}>ARCHEPERSONA</Text>
             <Text style={s.subtitle}>The consequence layer for autonomous AI agents</Text>
           </View>
@@ -173,11 +176,20 @@ export default function LoginScreen() {
 }
 
 const s = StyleSheet.create({
-  flex: { flex: 1, backgroundColor: Colors.bg },
+  flex: { flex: 1, backgroundColor: Colors.bg, overflow: "hidden" },
   loginPage: {
     flex: 1,
+    width: "100%",
+    maxWidth: "100%",
     minHeight: "100%",
     backgroundColor: Colors.bg,
+    overflow: "hidden",
+  },
+  scroll: {
+    flex: 1,
+    width: "100%",
+    maxWidth: "100%",
+    overflow: "hidden",
   },
   loginOverlay: {
     ...StyleSheet.absoluteFillObject,
@@ -185,11 +197,16 @@ const s = StyleSheet.create({
   },
   container: {
     flexGrow: 1,
+    width: "100%",
+    maxWidth: "100%",
+    overflow: "hidden",
     paddingHorizontal: Spacing.xl,
   },
   loginHero: {
     position: "relative",
     zIndex: 2,
+    width: "100%",
+    maxWidth: "100%",
     alignItems: "center",
     paddingBottom: Spacing.xl,
   },
@@ -221,6 +238,10 @@ const s = StyleSheet.create({
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 12,
   },
+  appTitleMobile: {
+    fontSize: 24,
+    letterSpacing: 2.2,
+  },
   companyName: {
     fontFamily: Fonts.bodySemiBold,
     fontSize: 12,
@@ -239,6 +260,7 @@ const s = StyleSheet.create({
     position: "relative",
     zIndex: 2,
     width: "100%",
+    maxWidth: "100%",
     alignItems: "flex-start",
     paddingTop: 28,
     paddingBottom: 36,
@@ -264,6 +286,7 @@ const s = StyleSheet.create({
     elevation: 12,
   },
   loginCardMobile: {
+    maxWidth: "100%",
     marginLeft: 0,
     marginTop: 28,
   },
