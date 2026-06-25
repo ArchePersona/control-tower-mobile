@@ -9,7 +9,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useAuth } from "@/src/services/auth";
 import { Colors, Fonts, Spacing, Radius } from "@/src/theme";
 
-const towerBackground = require("../../../images/tower-background.png");
+const towerBackground = require("../../assets/images/tower-background.png");
 const demoEmail = process.env.EXPO_PUBLIC_DEMO_EMAIL || "operator@archepersona.com";
 const demoPassword = process.env.EXPO_PUBLIC_DEMO_PASSWORD || "";
 
