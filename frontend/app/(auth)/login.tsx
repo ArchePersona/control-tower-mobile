@@ -50,7 +50,7 @@ export default function LoginScreen() {
       <ImageBackground source={towerBackground} style={s.loginPage} resizeMode="cover">
         <View style={s.loginOverlay} />
         <View style={s.goldWash} />
-        <ScrollView style={s.scroll} horizontal={false} showsHorizontalScrollIndicator={false} keyboardShouldPersistTaps="handled" contentContainerStyle={[s.container, { paddingTop: insets.top + (isMobile ? 24 : 30), paddingBottom: insets.bottom + 20 }]}>
+        <ScrollView style={s.scroll} horizontal={false} showsHorizontalScrollIndicator={false} keyboardShouldPersistTaps="handled" contentContainerStyle={[s.container, { paddingTop: insets.top + (isMobile ? 24 : 30), paddingBottom: insets.bottom + 12 }]}>
           <View style={s.loginHero}>
             <View style={[s.logoFrame, isMobile && s.logoFrameMobile]}><Image source={archeLogo} style={s.logoImage} resizeMode="contain" /></View>
             <View style={s.heroDivider} />
@@ -105,8 +105,6 @@ export default function LoginScreen() {
               {moduleStatus.map((item) => <View key={item.label} style={s.modulePill}><Ionicons name={item.icon as any} size={14} color={item.color} /><Text style={s.moduleInline}>{item.label} <Text style={s.moduleState}>{item.status}</Text></Text></View>)}
             </View>
           </View>
-
-          <View style={s.footer}><Text style={s.motto}>Character + Consequence = Trust.</Text></View>
         </ScrollView>
       </ImageBackground>
     </KeyboardAvoidingView>
@@ -133,15 +131,15 @@ const s = StyleSheet.create({
   trustMotifMobile: { gap: 6, paddingHorizontal: 11 },
   trustMotifText: { fontFamily: Fonts.bodySemiBold, fontSize: 9, color: "rgba(226, 232, 240, 0.72)", letterSpacing: 1.1 },
   trustDot: { width: 4, height: 4, borderRadius: 2, backgroundColor: "#f5c75f" },
-  gatehouseLogin: { position: "relative", zIndex: 2, width: "100%", maxWidth: "100%", alignItems: "flex-start", paddingTop: 8, paddingBottom: 16 },
+  gatehouseLogin: { position: "relative", zIndex: 2, width: "100%", maxWidth: "100%", alignItems: "flex-start", paddingTop: 8, paddingBottom: 10 },
   gatehouseLoginMobile: { alignItems: "center", paddingTop: 8 },
-  loginCard: { width: "100%", maxWidth: 500, marginLeft: Platform.OS === "web" ? "8%" : 0, marginTop: Platform.OS === "web" ? 32 : 24, backgroundColor: "rgba(6, 12, 27, 0.86)", borderRadius: 20, padding: 20, borderWidth: 1, borderColor: "rgba(245, 199, 95, 0.26)", shadowColor: Colors.black, shadowOpacity: 0.55, shadowRadius: 32, shadowOffset: { width: 0, height: 22 }, elevation: 12 },
-  loginCardMobile: { maxWidth: "100%", marginLeft: 0, marginTop: 20, padding: 18 },
+  loginCard: { width: "100%", maxWidth: 500, marginLeft: Platform.OS === "web" ? "8%" : 0, marginTop: Platform.OS === "web" ? 8 : 14, backgroundColor: "rgba(6, 12, 27, 0.86)", borderRadius: 20, padding: 20, borderWidth: 1, borderColor: "rgba(245, 199, 95, 0.26)", shadowColor: Colors.black, shadowOpacity: 0.55, shadowRadius: 32, shadowOffset: { width: 0, height: 22 }, elevation: 12 },
+  loginCardMobile: { maxWidth: "100%", marginLeft: 0, marginTop: 14, padding: 18 },
   cardHeader: { flexDirection: "row", alignItems: "flex-start", justifyContent: "space-between", gap: Spacing.md, marginBottom: 17 },
   cardHeaderText: { flex: 1 },
   formTitle: { fontFamily: Fonts.bodyBold, fontSize: 20, color: Colors.textPrimary, marginBottom: 5 },
   formSubtitle: { fontFamily: Fonts.body, fontSize: 13, lineHeight: 18, color: "rgba(203, 213, 225, 0.78)", maxWidth: 382 },
-  apBadgeImage: { width: 46, height: 46 },
+  apBadgeImage: { width: 40, height: 40 },
   inputGroup: { marginBottom: 14 },
   inputGroupLast: { marginBottom: 12 },
   label: { fontFamily: Fonts.bodySemiBold, fontSize: 11, color: "rgba(203, 213, 225, 0.78)", letterSpacing: 1.05, textTransform: "uppercase", marginBottom: 7 },
@@ -156,11 +154,9 @@ const s = StyleSheet.create({
   loginBtnText: { fontFamily: Fonts.bodyBold, fontSize: 14, color: "#050914", letterSpacing: 0.5 },
   demoBtn: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: Spacing.sm, backgroundColor: "rgba(245, 199, 95, 0.08)", borderRadius: Radius.md, paddingVertical: 12, borderWidth: 1, borderColor: "rgba(245, 199, 95, 0.26)", marginTop: 10 },
   demoBtnText: { fontFamily: Fonts.bodyBold, fontSize: 14, color: "#f5c75f", letterSpacing: 0.5 },
-  moduleStrip: { width: "100%", maxWidth: 620, marginLeft: Platform.OS === "web" ? "8%" : 0, marginTop: 12, flexDirection: "row", flexWrap: "wrap", gap: 8 },
+  moduleStrip: { width: "100%", maxWidth: 620, marginLeft: Platform.OS === "web" ? "8%" : 0, marginTop: 6, flexDirection: "row", flexWrap: "wrap", gap: 8 },
   moduleStripMobile: { maxWidth: "100%", marginLeft: 0, justifyContent: "center" },
   modulePill: { flexDirection: "row", alignItems: "center", gap: 7, paddingHorizontal: 10, paddingVertical: 7, borderRadius: 13, backgroundColor: "rgba(8, 14, 30, 0.7)", borderWidth: 1, borderColor: "rgba(148, 163, 184, 0.18)" },
   moduleInline: { fontFamily: Fonts.bodySemiBold, fontSize: 10, color: "rgba(226, 232, 240, 0.82)", letterSpacing: 0.65 },
   moduleState: { fontFamily: Fonts.bodyBold, fontSize: 10, color: "#f5c75f", letterSpacing: 0.6 },
-  footer: { position: "relative", zIndex: 2, alignItems: "center", marginTop: "auto", paddingBottom: 4 },
-  motto: { fontFamily: Fonts.bodySemiBold, fontSize: 12, color: "rgba(226, 232, 240, 0.72)", textAlign: "center" },
 });
