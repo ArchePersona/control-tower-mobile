@@ -50,7 +50,7 @@ export default function LoginScreen() {
       <ImageBackground source={towerBackground} style={s.loginPage} resizeMode="cover">
         <View style={s.loginOverlay} />
         <View style={s.goldWash} />
-        <ScrollView style={s.scroll} horizontal={false} showsHorizontalScrollIndicator={false} keyboardShouldPersistTaps="handled" contentContainerStyle={[s.container, { paddingTop: insets.top + (isMobile ? 24 : 30), paddingBottom: insets.bottom + 12 }]}>
+        <ScrollView style={s.scroll} horizontal={false} showsHorizontalScrollIndicator={false} keyboardShouldPersistTaps="handled" contentContainerStyle={[s.container, { paddingTop: insets.top + (isMobile ? 20 : 30), paddingBottom: insets.bottom + 12 }]}>
           <View style={s.loginHero}>
             <View style={[s.logoFrame, isMobile && s.logoFrameMobile]}><Image source={archeLogo} style={s.logoImage} resizeMode="contain" /></View>
             <View style={s.heroDivider} />
@@ -119,8 +119,8 @@ const s = StyleSheet.create({
   goldWash: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(245, 199, 95, 0.045)" },
   container: { flexGrow: 1, width: "100%", maxWidth: "100%", overflow: "hidden", paddingHorizontal: Spacing.xl },
   loginHero: { position: "relative", zIndex: 2, width: "100%", maxWidth: "100%", alignItems: "center", paddingBottom: 8 },
-  logoFrame: { width: 178, height: 58, maxWidth: "76%", alignItems: "center", justifyContent: "center", marginBottom: 5, opacity: 0.98 },
-  logoFrameMobile: { width: 154, height: 50 },
+  logoFrame: { width: 218, height: 70, maxWidth: "86%", alignItems: "center", justifyContent: "center", marginBottom: 4, opacity: 0.98 },
+  logoFrameMobile: { width: 212, height: 68, maxWidth: "88%" },
   logoImage: { width: "100%", height: "100%" },
   heroDivider: { width: 72, height: 1, backgroundColor: "rgba(245, 199, 95, 0.65)", marginBottom: 13 },
   appTitle: { fontFamily: Fonts.display, fontSize: 30, color: Colors.textPrimary, letterSpacing: 3.2, marginBottom: 5, textAlign: "center", textShadowColor: "rgba(245, 199, 95, 0.2)", textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 14 },
