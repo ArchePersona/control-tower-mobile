@@ -50,12 +50,11 @@ export default function LoginScreen() {
       <ImageBackground source={towerBackground} style={s.loginPage} resizeMode="cover">
         <View style={s.loginOverlay} />
         <View style={s.goldWash} />
-        <ScrollView style={s.scroll} horizontal={false} showsHorizontalScrollIndicator={false} keyboardShouldPersistTaps="handled" contentContainerStyle={[s.container, { paddingTop: insets.top + (isMobile ? 20 : 30), paddingBottom: insets.bottom + 12 }]}>
+        <ScrollView style={s.scroll} horizontal={false} showsHorizontalScrollIndicator={false} keyboardShouldPersistTaps="handled" contentContainerStyle={[s.container, { paddingTop: insets.top + (isMobile ? 14 : 26), paddingBottom: insets.bottom + 12 }]}>
           <View style={s.loginHero}>
             <View style={[s.logoFrame, isMobile && s.logoFrameMobile]}><Image source={archeLogo} style={s.logoImage} resizeMode="contain" /></View>
-            <View style={s.heroDivider} />
             <Text style={[s.appTitle, isMobile && s.appTitleMobile]} testID="app-title">CONTROL TOWER</Text>
-            <Text style={s.companyName}>POWERED BY ARCHEPERSONA</Text>
+            <Text style={s.companyName}>POWERED BY ARCHEngine</Text>
             <Text style={s.subtitle}>The trust checkpoint between autonomous agents and business action.</Text>
             <View style={[s.trustMotif, isMobile && s.trustMotifMobile]}>
               <Text style={s.trustMotifText}>CHARACTER</Text><View style={s.trustDot} />
@@ -119,13 +118,13 @@ const s = StyleSheet.create({
   goldWash: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(245, 199, 95, 0.045)" },
   container: { flexGrow: 1, width: "100%", maxWidth: "100%", overflow: "hidden", paddingHorizontal: Spacing.xl },
   loginHero: { position: "relative", zIndex: 2, width: "100%", maxWidth: "100%", alignItems: "center", paddingBottom: 8 },
-  logoFrame: { width: 218, height: 70, maxWidth: "86%", alignItems: "center", justifyContent: "center", marginBottom: 4, opacity: 0.98 },
-  logoFrameMobile: { width: 212, height: 68, maxWidth: "88%" },
+  logoFrame: { width: 304, height: 98, maxWidth: "94%", alignItems: "center", justifyContent: "center", marginBottom: 0, opacity: 0.98 },
+  logoFrameMobile: { width: 292, height: 94, maxWidth: "94%" },
   logoImage: { width: "100%", height: "100%" },
   heroDivider: { width: 72, height: 1, backgroundColor: "rgba(245, 199, 95, 0.65)", marginBottom: 13 },
-  appTitle: { fontFamily: Fonts.display, fontSize: 30, color: Colors.textPrimary, letterSpacing: 3.2, marginBottom: 5, textAlign: "center", textShadowColor: "rgba(245, 199, 95, 0.2)", textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 14 },
+  appTitle: { fontFamily: Fonts.display, fontSize: 30, color: Colors.textPrimary, letterSpacing: 3.2, marginBottom: 5, marginTop: -3, textAlign: "center", textShadowColor: "rgba(245, 199, 95, 0.2)", textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 14 },
   appTitleMobile: { fontSize: 23, letterSpacing: 2 },
-  companyName: { fontFamily: Fonts.bodySemiBold, fontSize: 11, color: "#f5c75f", letterSpacing: 1.9, textTransform: "uppercase", marginBottom: 7 },
+  companyName: { fontFamily: Fonts.bodySemiBold, fontSize: 11, color: "#f5c75f", letterSpacing: 1.9, marginBottom: 7 },
   subtitle: { fontFamily: Fonts.bodyMedium, fontSize: 14, color: "rgba(226, 232, 240, 0.86)", textAlign: "center", maxWidth: 620 },
   trustMotif: { flexDirection: "row", alignItems: "center", gap: 8, marginTop: 10, paddingHorizontal: 14, paddingVertical: 7, borderRadius: 999, backgroundColor: "rgba(8, 14, 30, 0.55)", borderWidth: 1, borderColor: "rgba(245, 199, 95, 0.18)" },
   trustMotifMobile: { gap: 6, paddingHorizontal: 11 },
